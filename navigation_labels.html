@@ -1,0 +1,25 @@
+<!-- When using more than one navigation landmark, use labels to help SR distinguish them -->
+
+<!-- Using aria-label -->
+<nav aria-label="Main">
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/products">Products</a></li>
+  </ul>
+</nav>
+
+<nav aria-label="Footer">
+  <ul>
+    <li><a href="/privacy">Privacy Policy</a></li>
+    <li><a href="/terms">Terms</a></li>
+  </ul>
+</nav>
+
+<!-- Using aria-labelledby -->
+<nav aria-labelledby="social-heading">
+  <h2 id="social-heading">Follow us</h2>
+  <ul>
+    <li><a href="/twitter">Twitter</a></li>
+    <li><a href="/facebook">Facebook</a></li>
+  </ul>
+</nav>
