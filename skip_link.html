@@ -1,0 +1,31 @@
+<style>
+  .skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+  }
+</style>
+
+<body>
+  <a class="skip-link" href="#content"> Jump to main content </a>
+
+  <header>
+    <nav aria-label="Main">
+      <!-- Navigation links -->
+    </nav>
+  </header>
+
+  <main id="content">
+    <h1>Main Content</h1>
+    <!-- ... -->
+  </main>
+</body>
