@@ -1,0 +1,39 @@
+<style>
+  html {
+    --dark: oklch(37.34% 0.081 236.96);
+    --light: oklch(98.89% 0.005 17.25);
+    --background: var(--light);
+    --text: var(--dark);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      --background: var(--dark);
+      --text: var(--light);
+    }
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text);
+    font-size: 2rem;
+    padding: 20px;
+    border: solid peru;
+    border-radius: 8px;
+  }
+</style>
+
+<body>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec arcu
+  porttitor, sodales sapien quis, vestibulum odio. Pellentesque massa tortor,
+  viverra ut ex dictum, facilisis tincidunt dui. Integer imperdiet, purus vel
+  iaculis auctor, nulla lectus placerat nibh, a fermentum quam metus lacinia
+  mauris. Sed pharetra urna a elementum tempor. Praesent a magna lacinia urna
+  interdum fringilla. Nulla laoreet turpis porta mauris imperdiet, nec interdum
+  nibh hendrerit. Nullam nec facilisis magna, tempus aliquam eros. Sed leo ex,
+  lacinia a erat eget, sagittis ornare nibh. Nunc sed enim et tellus scelerisque
+  aliquam at at dui. Praesent in metus quis augue vehicula fermentum. Cras non
+  quam sed leo porta congue. Pellentesque nisl sapien, egestas ac dui et,
+  accumsan ullamcorper tortor. Nulla consectetur malesuada nisi, eget euismod
+  ligula aliquam ut. Mauris vitae fringilla orci. Vivamus in lectus sapien.
+</body>
