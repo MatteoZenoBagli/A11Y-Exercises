@@ -1,0 +1,34 @@
+<style>
+  button[aria-expanded="false"]::after {
+    content: "▼";
+  }
+
+  button[aria-expanded="true"]::after {
+    content: "▲";
+  }
+</style>
+
+<!-- Accordion button -->
+<button
+  type="button"
+  aria-expanded="false"
+  aria-controls="faq-content"
+  onclick="toggleAccordion()"
+>
+  What is accessibility?
+</button>
+
+<div id="faq-content" hidden>
+  <p>Accessibility is...</p>
+</div>
+
+<script>
+  function toggleAccordion() {
+    const button = document.querySelector("[aria-expanded]");
+    const content = document.getElementById("faq-content");
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+    button.setAttribute("aria-expanded", !isExpanded);
+    content.hidden = isExpanded;
+  }
+</script>
