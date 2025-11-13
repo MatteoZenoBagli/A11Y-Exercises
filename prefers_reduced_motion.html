@@ -1,0 +1,21 @@
+<style>
+  button {
+    transition: transform 1s;
+    font-size: 2rem;
+    padding: 8px 16px;
+    margin: 20px;
+  }
+
+  button:focus,
+  button:hover {
+    transform: rotate(360deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    button {
+      animation: none;
+    }
+  }
+</style>
+
+<button class="element">Spinning button</div>
