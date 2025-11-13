@@ -1,0 +1,137 @@
+<style>
+  /* Obscure background */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+  }
+
+  /* Focus visible */
+  .modal-content *:focus {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+  }
+</style>
+
+<button id="open-modal">Open Modal</button>
+
+<div id="modal-overlay" class="modal-overlay" hidden>
+  <div
+    id="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    class="modal-content"
+  >
+    <h2 id="modal-title">Confirm Action</h2>
+    <p>Are you sure you want to proceed??</p>
+
+    <button id="confirm-btn">Confirm</button>
+    <button id="cancel-btn">Cancel</button>
+  </div>
+</div>
+
+<script>
+  class FocusTrap {
+    constructor(element) {
+      this.element = element;
+      this.previousFocus = null;
+      this.focusableSelectors =
+        "a[href], button:not([disabled]), textarea:not([disabled]), " +
+        'input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    }
+
+    getFocusableElements() {
+      return Array.from(this.element.querySelectorAll(this.focusableSelectors));
+    }
+
+    activate() {
+      this.previousFocus = document.activeElement;
+
+      const focusable = this.getFocusableElements();
+      this.firstFocusable = focusable[0];
+      this.lastFocusable = focusable[focusable.length - 1];
+
+      if (this.element.hasAttribute("tabindex")) this.element.focus();
+      else this.firstFocusable?.focus();
+
+      this.element.addEventListener("keydown", this.handleKeyDown);
+
+      this.setInertBackground(true);
+    }
+
+    handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        this.deactivate();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const focusable = this.getFocusableElements();
+      const firstFocusable = focusable[0];
+      const lastFocusable = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        e.preventDefault();
+        lastFocusable.focus();
+      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable.focus();
+      }
+    };
+
+    deactivate() {
+      this.element.removeEventListener("keydown", this.handleKeyDown);
+      this.setInertBackground(false);
+
+      if (this.previousFocus && this.previousFocus.focus)
+        this.previousFocus.focus();
+    }
+
+    setInertBackground(inert) {
+      const siblings = Array.from(document.body.children);
+      siblings.forEach((sibling) => {
+        if (
+          sibling !== this.element &&
+          sibling !== this.element.parentElement
+        ) {
+          if (inert) {
+            sibling.setAttribute("inert", "");
+            sibling.setAttribute("aria-hidden", "true");
+          } else {
+            sibling.removeAttribute("inert");
+            sibling.removeAttribute("aria-hidden");
+          }
+        }
+      });
+    }
+  }
+
+  const modal = document.getElementById("modal");
+  const focusTrap = new FocusTrap(modal);
+
+  document.getElementById("open-modal").addEventListener("click", () => {
+    modal.hidden = false;
+    focusTrap.activate();
+  });
+
+  document.getElementById("close-modal").addEventListener("click", () => {
+    modal.hidden = true;
+    focusTrap.deactivate();
+  });
+</script>
