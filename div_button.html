@@ -1,0 +1,75 @@
+<!-- Make div an accessible button -->
+<!--
+  Steps:
+  1. Add semantic role
+  2. Add tabindex for tab focus
+  3. Handle js events such keyup / keydown / click
+  4. Add text, aria-label or aria-labelledby
+  5. Style focus
+  6. Use correct ARIAs such as:
+    a. aria-pressed
+    b. aria-haspopup ("menu", "dialog", ...)
+    c. aria-expanded
+    d. aria-controls
+    e. aria-disabled
+-->
+<div
+  role="button"
+  tabindex="0"
+  aria-pressed="false"
+  id="dark-mode-toggle"
+  class="toggle-button"
+>
+  🌙 Dark mode
+</div>
+
+<style>
+  .toggle-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+  }
+
+  .toggle-button:hover {
+    background: #e0e0e0;
+  }
+
+  .toggle-button:focus {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+  }
+
+  .toggle-button[aria-pressed="true"] {
+    background: #333;
+    color: white;
+    border-color: #000;
+  }
+</style>
+
+<script>
+  const button = document.getElementById("dark-mode-toggle");
+
+  button.addEventListener("click", toggleDarkMode);
+
+  button.addEventListener("keydown", (e) => {
+    if (e.key === " " || e.key === "Spacebar") e.preventDefault(); // Prevent scroll
+  });
+
+  button.addEventListener("keyup", (e) => {
+    if (e.key === " " || e.key === "Spacebar" || e.key === "Enter") {
+      e.preventDefault();
+      toggleDarkMode();
+    }
+  });
+
+  function toggleDarkMode() {
+    const pressed = button.getAttribute("aria-pressed") === "true";
+    button.setAttribute("aria-pressed", !pressed);
+    document.body.classList.toggle("dark-mode", !pressed);
+  }
+</script>
