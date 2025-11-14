@@ -1,0 +1,171 @@
+<html lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <style>
+      html {
+        font-size: 16px;
+      }
+
+      nav {
+        position: var(--nav-list-position, fixed);
+        inset-block-start: 1rem;
+        inset-inline-end: 1rem;
+      }
+
+      nav ul {
+        background: hsl(0 0% 100%);
+        box-shadow: var(--nav-list-shadow, -5px 0 11px 0 hsl(0 0% 0% / 0.2));
+        display: flex;
+        flex-direction: var(--nav-list-layout, column);
+        flex-wrap: wrap;
+        gap: 1rem;
+        height: var(--nav-list-height, 100dvh);
+        width: var(--nav-list-width, min(22rem, 100vw));
+        list-style: none;
+        margin: 0;
+        padding: var(--nav-list-padding, 2rem);
+        position: var(--nav-list-position, fixed);
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        visibility: var(--nav-list-visibility, hidden);
+      }
+
+      [aria-expanded="true"] + ul {
+        --nav-list-visibility: visibile;
+      }
+
+      @media (min-width: 48em) {
+        nav {
+          --nav-list-position: static;
+          --nav-button-display: none;
+        }
+
+        nav ul,
+        nav ul:first-child {
+          --nav-list-layout: row;
+          --nav-list-position: static;
+          --nav-list-padding: 0;
+          --nav-list-height: auto;
+          --nav-list-width: 100%;
+          --nav-list-shadow: none;
+          --nav-list-visibility: visible;
+        }
+
+        nav button {
+          all: unset;
+          display: var(--nav-button-display, flex);
+          position: relative;
+          z-index: 1;
+          cursor: pointer;
+        }
+
+        nav button:focus-visible {
+          outline: 4px solid currentColor;
+          outline-offset: 2px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav aria-label="Main" id="main-nav">
+      <ul id="main-nav-list">
+        <li><a href="/homepage">Homepage</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+
+      <template id="burger-template">
+        <button
+          type="button"
+          aria-expanded="false"
+          aria-label="Menu"
+          aria-controls="main-nav-list"
+        >
+          <svg viewBox="-5 0 10 8" width="40" aria-hidden="true">
+            <line
+              y2="6.5"
+              stroke="#000"
+              stroke-width="10"
+              stroke-dasharray="1.5 1"
+            />
+          </svg>
+        </button>
+      </template>
+    </nav>
+
+    <p id="width-label"></p>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at
+      venenatis nibh. Nam non aliquet dolor, eu consectetur metus. Donec vel
+      accumsan enim. Nam ac nisi et lorem blandit lobortis. Lorem ipsum dolor
+      sit amet, consectetur adipiscing elit. Sed et viverra lacus. Nam luctus
+      ligula ante, nec tristique lacus auctor nec. Vivamus vitae lorem at leo
+      sollicitudin fermentum. Sed dictum euismod augue eget convallis. Fusce
+      lacinia commodo metus. Praesent rhoncus dui in lorem euismod, id placerat
+      libero convallis. Donec id velit facilisis, dignissim eros non, blandit
+      massa. Integer sed rutrum nisl, at maximus libero. Curabitur commodo
+      aliquam eros nec dictum. Aenean quam mi, tristique vel malesuada eu,
+      luctus et lectus. Integer scelerisque nec mauris venenatis laoreet. Sed
+      rutrum euismod nulla eget convallis. In feugiat egestas est. Nam a mattis
+      orci, quis ornare est. Lorem ipsum dolor sit amet, consectetur adipiscing
+      elit. Nam et elementum dui. Vestibulum facilisis nisl eget nisi commodo,
+      vel tristique nisi feugiat. Nullam efficitur tincidunt euismod. Nunc
+      ultrices et tortor at consequat. Pellentesque id interdum nunc, quis
+      bibendum quam. Sed a augue eget enim congue consequat sed ac nulla. Nam
+      congue fermentum urna, eget dapibus risus malesuada vel. Etiam bibendum
+      bibendum tortor sit amet sollicitudin. Aenean vitae posuere felis, et
+      tincidunt justo. Curabitur sed semper nunc. Morbi consectetur in turpis
+      sed iaculis. Etiam enim augue, facilisis vitae fringilla non, ultrices vel
+      est. Morbi dictum cursus orci a tincidunt. Integer turpis urna, lacinia id
+      efficitur et, dapibus at ante. Morbi varius ultrices orci sed consequat.
+      Suspendisse potenti. Phasellus leo nulla, posuere eget ligula eget,
+      tristique fringilla magna. Curabitur sed tempor quam. Proin tincidunt
+      elementum est, nec sagittis quam tristique at. Mauris sit amet tempus
+      eros, at congue tortor. Phasellus pretium, mi et hendrerit condimentum, mi
+      diam ultricies felis, ut consectetur est ex id nulla. Proin pretium
+      venenatis auctor. Donec faucibus scelerisque eros, et sollicitudin nisi
+      dictum at. Duis sed nisi vitae massa malesuada tincidunt. Suspendisse
+      aliquet gravida ex, eget accumsan nulla lacinia a. Donec a erat libero.
+      Nunc volutpat ex eu lectus rhoncus ultrices quis at elit. Curabitur sit
+      amet purus erat. Quisque odio sapien, varius in feugiat at, sagittis
+      molestie arcu. Fusce non mauris massa. Etiam in auctor lacus. Sed maximus
+      tempus placerat. Praesent sed accumsan tortor. Donec scelerisque metus
+      efficitur elit condimentum molestie vitae at nunc. Morbi ut ipsum
+      pellentesque, laoreet dolor vel, sollicitudin felis. Donec id odio eget
+      orci scelerisque fringilla. Nulla urna augue, tincidunt a lacus a,
+      pellentesque finibus orci. Ut interdum ultrices tristique.
+    </p>
+    <script>
+      const widthLabel = document.getElementById("width-label");
+      function showCurrentWidth() {
+        const width = window.innerWidth;
+        widthLabel.textContent = `Current window width: ${width} px (${
+          width / 16
+        } rem)`;
+      }
+      window.addEventListener("resize", showCurrentWidth);
+      showCurrentWidth();
+
+      const nav = document.querySelector("nav");
+      const list = nav.querySelector("ul");
+      const burgerTemplate = document.querySelector("#burger-template");
+      const burgerClone = burgerTemplate.content.cloneNode(true);
+      const button = burgerClone.querySelector("button");
+
+      button.addEventListener("click", (e) => {
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", !isOpen);
+      });
+
+      nav.addEventListener("keyup", (e) => {
+        if ("Escape" !== e.code) return;
+        button.setAttribute("aria-expanded", false);
+        button.focus();
+      });
+
+      nav.insertBefore(burgerClone, list);
+    </script>
+  </body>
+</html>
